@@ -1,13 +1,20 @@
 import express from 'express';
-import { createProduct, getAllProducts, getProductById, updateProduct, deleteProduct } from '../controllers/productController.js';
+import {
+  createProduct,
+  getAllProducts,
+  getProductById,
+  updateProduct,
+  deleteProduct
+} from '../controllers/productController.js';
+import { isAdmin } from '../middleware/auth.js'; // Import your middleware
 
 const router = express.Router();
 
-// Define routes
-router.post('/products', createProduct);
+// Apply isAdmin middleware to these routes
+router.post('/products', isAdmin, createProduct);
+router.put('/products/:id', isAdmin, updateProduct);
+router.delete('/products/:id', isAdmin, deleteProduct);
 router.get('/products', getAllProducts);
 router.get('/products/:id', getProductById);
-router.put('/products/:id', updateProduct);
-router.delete('/products/:id', deleteProduct);
 
 export default router;

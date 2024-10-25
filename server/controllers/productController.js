@@ -7,7 +7,6 @@ export const createProduct = async (req, res) => {
     price: req.body.price,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
-    // Add other product fields as needed
   });
 
   try {
